@@ -1,0 +1,110 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+            <td style="height:100%">
+				<table class="content">
+					<tr>
+						<td class="content_td">
+							<h3>ТАБЛИЧНАЯ СТРУКТУРА</h3>
+              						<table class="tablevar"> 
+                						<tr> 
+                 							<td rowspan="2" style="width: 15%"></td> 
+                  							<td style="background: red; height: 28%;"></td> 
+                  							<td colspan="3"></td> 
+                  							<td style="background: yellow; width: 12%;"></td> 
+                						</tr> 
+                						<tr> 
+                  							<td colspan="2"></td> 
+                  							<td rowspan="2" style="background: blue; width: 12%;"></td> 
+                  							<td></td> 
+                 							<td rowspan="2"></td> 
+                						</tr> 
+                						<tr> 
+                  							<td colspan="2" style="background: green;"></td> 
+                  							<td style="width: 17%;"></td> 
+                  							<td style="width: 16%;"></td> 
+                						</tr> 
+              						</table>
+							<br/>
+
+							<h3>Форма резюме, заполняемая абитуриентом при приеме в ВУЗ:</h3>						
+							<div>
+								<form action="POST">
+									<p>
+          									<b>Фамилия:</b> 
+          									<input type="text" name="surname" maxlength="70" size="35" placeholder="Введите фамилию"/>
+       									</p>
+                							<p>
+          									<b>Имя:</b> 
+          									<input type="text" name="name" maxlength="70" size="35" placeholder="Введите имя"/>
+        								</p>
+                							<p>
+          									<b> Отчество:</b> 
+          									<input type="text" name="namename" maxlength="70" size="35" placeholder="Введите отчество"/>
+        								</p>        
+        								<p>
+          									<b>Пол: </b>
+          									<input type="radio" name="men" value="Stat1">Мужской 
+          									<input type="radio" name="men" value="Stat2">Женский
+        								</p>
+									<p>
+										<b>Город проживания:</b> 
+										<input type="text" name="city" maxlength="70" size="35" placeholder="Введите город"/>
+									</p> 
+									<p>
+										<b>Мобильный телефон:</b> 
+										<input type="text" name="telephone" maxlength="11" size="20" placeholder="Введите номер телефона"/>
+									</p>
+									<p>
+										<b>E-Mail:</b> 
+										<input type="text" name="email" maxlength="30" size="30" placeholder="Укажите свой e-mail"/>
+									</p>
+									<p>
+										<b>Знание иностранных языков:</b> 
+										<input type="checkbox" name="english" value="yes">Английский
+										<input type="checkbox" name="china" value="yes">Китайский 
+										<input type="checkbox" name="datch" value="yes">Немецкий
+										<input type="checkbox" name="franch" value="yes">Французский
+								    </p>
+								<p>
+          								<b>Факультет:</b> 
+          								<select name="faculty">
+										<option value="электроники">электроники (ФЭ)</option>
+										<option value="радиотехники и телекоммуникаций">радиотехники и телекоммуникаций (ФРТ)</option>
+										<option value="автоматики и информационных технологий в управлении">автоматики и информационных технологий в управлении(ФАИТУ)</option>
+										<option value="вычислительной техники">вычислительной техники (ФВТ)</option>
+										<option value="инженерно-экономический">инженерно-экономический (ИЭФ)</option>
+									</select>
+          							</p> 
+           							<p>
+            								<b>Направление:</b>
+										<select name="Direction">
+											<option value="Нанотехнологии">Нанотехнологии (ФЭ)</option>
+											<option value="Радиоэлектронные системы и комплексы">Радиоэлектронные системы и комплексы (ФРТ)</option>
+											<option value="Информационные системы и технологии">Информационные системы и технологии(ФАИТУ)</option>
+											<option value="Компьютерные и информационные науки">Компьютерные и информационные науки (ФВТ)</option>
+											<option value="Менеджмент">Менеджмент (ИЭФ)</option>
+										</select>
+          							</p> 
+          							<p>
+          								<b>Форма обучения:</b>
+          								<input type="checkbox" name="fulltime" value="Stat1">Очная  
+          								<input type="checkbox" name="extramural" value="Stat2">Заочная
+          								<input type="checkbox" name="evening" value="Stat3">Вечерняя
+        							</p>
+								<p>
+           								<b>Почему Вы выбрали именно наш ВУЗ?</b> <br/>
+           								<textarea name="improve" cols="70" rows="5" placeholder="Введите текст"></textarea>
+          							</p>
+									<input type="submit" value="Отправить"/>
+								</form>
+							</div>
+						</td>
+					</tr>
+				</table>
+            </td>
+        </tr>
+	</table>
+</body>
+
+</html>

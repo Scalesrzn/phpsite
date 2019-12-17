@@ -1,0 +1,1 @@
+<img src="../gallery/logo3.jpg" alt="СкладовщикЪ">

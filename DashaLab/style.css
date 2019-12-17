@@ -1,0 +1,152 @@
+﻿@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+p, a, h4 , h5, h6 {
+	font-family: 'Roboto';
+}
+
+h2{
+	margin: 40px 50px 0 150px;
+}
+
+h3{
+    margin: 15px 0 20px 20px;
+	font-size: 30px;
+    font-weight: 600;
+	color: Crimson;
+
+}
+
+body {
+ 	font:18px Arial, Helvetica, sans-serif;
+	color:#3D372B;/* цвет текста на главной странице */
+	background:#fff; /* Фоновое изображение */ 
+	text-align:center;
+}
+
+.welcomemsg, .welcomemsg	a{
+    width: 100%;
+    text-align: right;
+    color: FireBrick;
+    padding-right: 50px;
+    text-decoration: underline;;
+
+}
+
+.table
+{
+	margin:0 auto;
+	width:100%;
+	height:100%;
+	background:#FFFAFA;
+	border-collapse: collapse; 
+}
+
+.top, .content, .menu, .bottom
+{
+	width:100%;
+	height:100%;
+}
+
+.top
+{
+	border-spacing:0;
+}
+
+
+.bottom
+{
+	text-align:center;
+	font-size:18px;
+	background:#FAEBD7;
+}
+
+.menu td, .content_td
+{
+	border:0px solid #000;
+	vertical-align:top;
+	padding-top:20px;
+	padding-bottom:20px;
+	position:relative;
+}
+
+.menu td
+{
+	background:#FAEBD7;
+	text-align:center;
+}	
+
+.menu ul
+{
+	list-style-type:none;
+	margin:0px;
+	padding-left:0px;
+}	
+
+.menu a
+{
+	text-decoration:none;
+	color:#fff; 
+	background:#A52A2A;
+	display:block;
+	padding:12px;
+	border-radius:0px;
+	border: 0px solid #fff
+}
+
+.menu a:hover 
+{
+	background:#800000;
+}
+
+.menu li
+{
+	margin-bottom:3px;
+}
+
+.content_td div
+{
+	display:block;
+	text-align:justify;
+	padding-left:20px;
+	padding-right:20px;
+	width:600;
+}
+
+.content3
+{
+	display:block;
+	text-align:justify;
+	padding-left:20px;
+	padding-right:20px;
+	width:600;
+}
+
+.content4
+{
+	display:block;
+	text-align:justify;
+	padding-left:200px;
+	padding-right:20px;
+	width:600;
+}
+
+.tablevar
+{
+	width:700px; 
+	height:200px; 
+	margin:auto; 
+	border:1px solid
+}
+
+.tablevar td
+{
+	border:1px solid
+}
+
+
+.header-logo {
+	
+	width: 200px;
+}
+
+
