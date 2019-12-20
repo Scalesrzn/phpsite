@@ -4,7 +4,9 @@ function getMenu($menu, $vertical=true) {
 	foreach ($menu as $link=>$href)
 	{
 		// echo "<div><form action='index.html'><button formaction='index.php' class='btn'>Главная</button></form></div>";
-		echo "<div><a class='button' style='margin: 0 0 0 0' href=\"$href\">", $link, '</a></div>';
+		//echo "<div><a class='button' style='margin: 0 0 0 0' href=\"$href\">", $link, '</a></div>';
+		echo "<div><a class='button' style='margin: 0 0 0 0' href=\"$href\"><button formaction='index.php' class='btn'>",$link,'</button> </a></div>';
+
 	}
 }
 

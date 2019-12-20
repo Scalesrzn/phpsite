@@ -3,7 +3,7 @@ if (isset($_POST['login']) && isset($_POST['password'])) {
 	$login = clearData($_POST['login']);
 	$password = clearData($_POST['password']);
 	if ($login=='admin' && $password=='admin') {
-		session_start();
+		//session_start();
 		$_SESSION['ip'] = $_SERVER['REMOTE_ADDR'];
 		$_SESSION['user_login'] = $login;
 		header("Location: http://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']);
@@ -12,7 +12,7 @@ if (isset($_POST['login']) && isset($_POST['password'])) {
 }
 
 if (isset($_GET['logout'])) {
-	session_start();
+	//session_start();
 	session_destroy();
 	header("Location: index.php");
 	exit;
