@@ -1,3 +1,17 @@
+<?php
+	session_start();
+	ob_start();
+	ini_set('display_errors',1);
+	date_default_timezone_set('Europe/Moscow');
+	header("Content-Type: text/html; charset=utf-8");
+	header("Cache-control: no-store");
+	if (isset($_COOKIE['dateVisit']))
+		$dateVisit = $_COOKIE['dateVisit'];
+	setcookie('dateVisit',date('Y-m-d H:i:s'),time()+0xFFFFFFF);
+		//Инициализация переменных
+	$page = "";
+
+?>
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -25,7 +39,7 @@
 		<div class='center'>
 			
 			<div class="content">
-				<div>
+				<div class="toggle">
 					<?php
 						if (!empty($_GET['page']))
 								$page = $_GET['page'];

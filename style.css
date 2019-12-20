@@ -15,7 +15,12 @@
 
 
 .btn:hover { background: linear-gradient(#008c9e, #B0E0E6) #008c9e; }
-
+.toggle{
+	width: 100%;
+}
+.toggle, .gallery {
+	display: inline;
+  }
 
 .menu {
 	height: 3.5em;

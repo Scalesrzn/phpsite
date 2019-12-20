@@ -6,7 +6,7 @@ if (isset($_POST['login']) && isset($_POST['password'])) {
 		//session_start();
 		$_SESSION['ip'] = $_SERVER['REMOTE_ADDR'];
 		$_SESSION['user_login'] = $login;
-		header("Location: http://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']);
+		//header("Location: http://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']);
 		exit;
 	}
 }
