@@ -24,7 +24,7 @@
 	background:linear-gradient(#B0E0E6, #32d8ed) #32d8ed;
 	color: white;
     border-radius: 10px;
-	float: left;
+
 }
 .btn:hover { background: linear-gradient(#008c9e, #B0E0E6) #008c9e; }
 .toggle{
