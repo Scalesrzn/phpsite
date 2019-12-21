@@ -18,8 +18,10 @@
 .toggle{
 	width: 100%;
 }
-.toggle, .gallery {
-	display: inline;
+.content {
+	display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
   }
 
 .menu {

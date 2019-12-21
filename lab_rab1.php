@@ -1,5 +1,5 @@
 
-
+<link href="lab1.css" rel="stylesheet">
 <div id="vneshniy">
 	<div id="block1">
 		<div id="block11">
