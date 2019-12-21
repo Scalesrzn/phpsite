@@ -13,7 +13,19 @@
 	width: 100%;
 }
 
-
+.btn{
+	height: 3em;
+	width: 10em;
+	padding: 5px;
+	margin-top: 5px;
+	margin-right: 1em;
+	margin-left: 1em;
+	border: 0px;
+	background:linear-gradient(#B0E0E6, #32d8ed) #32d8ed;
+	color: white;
+    border-radius: 10px;
+	float: left;
+}
 .btn:hover { background: linear-gradient(#008c9e, #B0E0E6) #008c9e; }
 .toggle{
 	width: 100%;
@@ -203,4 +215,15 @@
 	border-radius: 20px;
 	margin: 10px;
 }
+.addtable{
+	background-color: rgba(234,249,246);
+	border-radius: 20px;
+	margin: 10px;	
 
+}
+.toggle{
+	display: inline-block;
+	padding: 10px;
+	text-align: center;
+	justify-content: center;
+}
