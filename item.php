@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 	</tr>
 	<tr>
 		<th bgcolor="#FA8072">Бренд</th>
-		<td  width="45%"><?= $_SESSION['catalog'][$id]['autors']?></td>
+		<td  width="45%"><?= $_SESSION['catalog'][$id]['brand']?></td>
 	</tr>
 	<tr>
 		<th bgcolor="#FA8072">Год модели</th>
