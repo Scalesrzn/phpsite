@@ -11,7 +11,9 @@
 			$number = (int) $_POST['number'];
 			$_SESSION['story'][$i] = $_POST['number'];
 			$try = 3 - $_SESSION['count'];
-			echo 'Вы уже вводили '. $_SESSION['story'].' ';
+			if ($_SESSION['story'][0] != ''){
+				echo 'Вы уже вводили '. $_SESSION['story'][0].' '.$_SESSION['story'][1].' '.$_SESSION['story'][2]. ' ';
+			}
 			echo '</br><span> Вы ввели:  '.$_POST['number']. '</span>';
 			echo "</br><span> Осталось попыток : $try </span>";
 			if ($_SESSION['count'] != 3){
