@@ -1,29 +1,61 @@
 <?php
-$id = strip_tags(trim($_GET['id']));
-$host = "localhost:".dirname(__FILE__)."\base.fdb";
-$user="SYSDBA";
-$pass="masterkey";
-$dbh = ibase_connect($host, $user, $pass);
-$query = "SELECT * FROM FILMS WHERE ID='$id'";
-$result = ibase_query($dbh, $query) or die("Сбой при доступе к БД: " . ibase_errmsg());
-$row = ibase_fetch_row($result);
-if ($_SERVER['REQUEST_METHOD'] == 'POST')
-{
-if (!empty($_POST['name']) && !empty($_POST['genre']) && !empty($_POST['year']))
-{
-$name = strip_tags(trim($_POST['name']));
-$genre = strip_tags(trim($_POST['genre']));
-$year = strip_tags(trim($_POST['year']));
-$query = "UPDATE FILMS SET NAME='$name', GENRE='$genre', RELEASE_YEAR='$year' WHERE ID='$id'";
-ibase_query($dbh, $query) or die ("Сбой при доступе к БД: " . ibase_errmsg());
-header('Location: catalog.php');
-}
-else echo 'Полностью заполните форму';
-}
-?>
-<form method='POST'>
-<p>Название:<input type='text' name='name' value='<?=$row[1]?>'></p>
-<p>Жанр:<input type='text' name='genre' value='<?=$row[2]?>'></p>
-<p>Год выпуска:<input type='text' name='year' value='<?=$row[3]?>'></p>
-<p><input type='submit' value='Изменить'></p>
-</form>
+$id = clearData($_GET['id']);	
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {		
+	if (!empty($_POST['name']) && !empty($_POST['brand']) && !empty($_POST['year']) && !empty($_POST['description'])) {	
+		if ($_FILES['uploadfile']['tmp_name']) {				
+				$a = loadImage("edit"); 		
+				if (empty($a['mess'])) {
+					$_SESSION['catalog'][$id] = array("name"=>clearData($_POST['name']),
+						"brand"=>clearData($_POST['brand']),
+						"year"=>clearData($_POST['year']),
+						"description"=>clearData($_POST['description']),
+						"image"=>$a['src']);			
+					header("Location: index.php?page=catalog");
+					exit;
+				}
+				else { 
+					echo $a['mess'];
+				}
+			}
+			else {		
+				$src = $_SESSION['catalog'][$id]['image'];
+				$_SESSION['catalog'][$id] = array("name"=>clearData($_POST['name']),
+					"brand"=>clearData($_POST['brand']),
+					"year"=>clearData($_POST['year']),
+					"description"=>clearData($_POST['description']),
+					"image"=>$src);			
+				header("Location: index.php?page=catalog");
+				exit;
+			}
+		}
+		else 
+			echo '<font size="5" color="DarkRed"><strong>Заполните все поля!</strong></font>';		
+	}
+	?>
+	
+	<h2 style="margin: 10px 100px 30px 200px;">Редактирование товара</h2>
+	<form method='POST' action='index.php?page=edit&id=<?php echo $id; ?>' ENCTYPE='multipart/form-data'>			
+		<table>
+			<tr>
+				<th>Название товара:</th>
+				<td><input type='text' name='name' value='<?=$_SESSION['catalog'][$id]['name']?>' size="35"></td>
+			</tr>
+			<tr>
+				<th>Бренд:</th> 
+				<td><input type='text' name='brand' value='<?=$_SESSION['catalog'][$id]['brand']?>' size="35"></td>
+			</tr >
+			<tr>
+				<th>Год модели:</th>
+				<td><input type='text' name='year' value='<?=$_SESSION['catalog'][$id]['year']?>' size='4'>&nbsp;год</td>
+			</tr>
+			<tr>
+				<th>Описание:</th>
+				<td><textarea name='description' rows='10' cols='50' style="resize:none;" ><?=$_SESSION['catalog'][$id]['description']?></textarea></td>
+			</tr>
+			<tr>
+				<th>Изображение:</th> 
+				<td><input type='file' name='uploadfile'></td>
+			</tr>
+		</table>
+		<center><p><input class="btn" type='submit' value='Сохранить'></p></center>
+	</form>
