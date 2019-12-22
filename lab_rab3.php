@@ -1,18 +1,22 @@
 <?php
 	session_start();
+	setcookie('story',$storyarr);
 	$from = 1;
 	$to = 10;
 	$report = '';
-	$story = array();
 	if (isset($_POST['submit'])) {
 		if (isset($_SESSION['count']) <=3)
+			$i = $_SESSION['count'] -1;
 			$_SESSION['count']++;
 			$number = (int) $_POST['number'];
-			array_push($story, $_SESSION['number'] );
-			echo "<span> Вы вводили:  $story</span>";
+			$_SESSION['story'][$i] = $_POST['number'];
+			$try = 3 - $_SESSION['count'];
+			echo 'Вы уже вводили '. $_SESSION['story'].' ';
+			echo '</br><span> Вы ввели:  '.$_POST['number']. '</span>';
+			echo "</br><span> Осталось попыток : $try </span>";
 			if ($_SESSION['count'] != 3){
 				if ($number == $_SESSION['number']) {
-					$report = 'Угадал с ' . $_SESSION['count'] . ' попыток';
+					$report = '<span>Угадал с ' . $_SESSION['count'] . ' попыток</span>';
 					$_SESSION['count'] = 0;
 					$_SESSION['number'] = mt_rand($from, $to);
 
@@ -22,17 +26,22 @@
 				}
 			}
 			else{
+				$_SESSION['story'][0] = '';
+				$_SESSION['story'][1] = '';	
+				$_SESSION['story'][2] = '';
 				$_SESSION['count'] = 0;
 				$_SESSION['number'] = mt_rand($from, $to);	
 				echo 'Попытки кончились. Попробуй еще раз!';
 			}
 		
 	} else {
+		$_SESSION['story'][0] = '';
+		$_SESSION['story'][1] = '';	
+		$_SESSION['story'][2] = '';
 		$_SESSION['number'] = mt_rand($from, $to);
 		$_SESSION['count'] = 0;
 		
 	}
- 
 ?>
         <div><?=$report ?></div>
         <form action="<?php $_SERVER['SCRIPT_NAME']?>" method="POST">
