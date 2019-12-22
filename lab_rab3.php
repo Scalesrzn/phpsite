@@ -8,13 +8,23 @@
 		if (isset($_SESSION['count']) <=3)
 			$_SESSION['count']++;
 			$number = (int) $_POST['number'];
-			$story = array_push($story, isset($_POST['submit']) );
+			array_push($story, $_SESSION['number'] );
 			echo "<span> Вы вводили:  $story</span>";
-			if ($number == $_SESSION['number']) {
-				$report = 'Угадал с ' . $_SESSION['count'] . ' попыток';
+			if ($_SESSION['count'] != 3){
+				if ($number == $_SESSION['number']) {
+					$report = 'Угадал с ' . $_SESSION['count'] . ' попыток';
+					$_SESSION['count'] = 0;
+					$_SESSION['number'] = mt_rand($from, $to);
+
+				}
+				else {
+					echo "</br>Не угадал!";
+				}
 			}
-			else {
-				echo "</br>Не угадал!";
+			else{
+				$_SESSION['count'] = 0;
+				$_SESSION['number'] = mt_rand($from, $to);	
+				echo 'Попытки кончились. Попробуй еще раз!';
 			}
 		
 	} else {
