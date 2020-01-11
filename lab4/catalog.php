@@ -1,11 +1,13 @@
-<button onclick="location.href='index.php?page=add';" class="catalog_2" style="float: left;">Добавить</button>
+﻿<button onclick="location.href='index.php?page=add';" class="catalog_2" style="float: left;">Добавить</button>
 <table class="data_table"  border="1">
 	<tr>
 		<th width="10%">ID</th>
-		<th width="20%">Название товара</th>
-		<th width="25%">Бренд</th>
-		<th width="20%">Год модели</th>
-		<th width="15%">Описание</th>
+		<th width="20%">Название</th>
+		<th width="25%">Страна</th>
+		<th width="20%">Бренд</th>
+		<th width="15%">Цена</th>
+		<th width="15%">Дата поступления</th>
+		<th width="5%">Х</th>
 	</tr>
 
 	<?php
