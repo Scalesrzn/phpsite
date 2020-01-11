@@ -48,8 +48,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 	if (!empty($_POST['nametovar']) && !empty($_POST['brand']) && !empty($_POST['year']) && !empty($_POST['description']))
 	{
 		$nametovar = clearData($_POST['nametovar']);
-		$dbh = ibase_connect($host, $user, $pass);
-		$total_items = ibase_fetch_row(ibase_query("SELECT COUNT(*) FROM ITEMS WHERE nametovar='$nametovar'"));
+		$dbh = mysqli_connect($host, $user, $pass);
+		$total_items = mysqli_fetch_row(mysqli_query($dbh,"SELECT COUNT(*) FROM ITEMS WHERE nametovar='$nametovar'"));
 		if ($total_items[0] < 1)
 		{
 			$brand = clearData($_POST['brand']);
@@ -76,7 +76,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 				} 
 			}
 			$query = "INSERT INTO ITEMS (nametovar,brand,year,DESCRIPTION,uploadlink) VALUES ('$nametovar','$brand','$year','$description','$uploadlink')";
-			ibase_query($dbh, $query) or die ("Сбой при доступе к БД: " . ibase_errmsg());
+			mysqli_query($dbh, $query) or die ("Сбой при доступе к БД: ");
 			header("Location: index.php?page=catalog");
 		}
 		else echo 'Такая косметика уже добавлена';

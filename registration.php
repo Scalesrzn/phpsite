@@ -9,11 +9,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 			$hash_password = clearData($_POST['password_1']);
 			$email_reg = clearData($_POST['email']);
 			
-			$dbh = ibase_connect($host, $user, $pass); 
+			$dbh = mysqli_connect($host, $user, $pass); 
 			$query = "INSERT INTO USE (LOGIN,PASSWORD,EMAIL) VALUES ('$login_reg','$hash_password','$email_reg')";
-			if (ibase_query($dbh, $query)) header("Location: index.php");
-			else echo "Сбой при вставке данных: " . ibase_errmsg();
-			ibase_trans();
+			if (mysqli_query($dbh, $query)) header("Location: index.php");
+			else echo "Сбой при вставке данных: " ;
+			//mysqli_trans();
 		}
 		else echo 'Пароли не совпадают';
 	}

@@ -3,12 +3,12 @@ if (isset($_POST['login']) && isset($_POST['password']))
 {
 	$login = clearData($_POST['login']);
 	$password = clearData($_POST['password']);
-	$dbh = ibase_connect($host, $user, $pass); 
+	$dbh = mysqli_connect($host, $user, $pass); 
 
 	
 	$query = "SELECT * FROM USE WHERE LOGIN='$login' AND PASSWORD='$password'";
-	$result = ibase_query($dbh, $query);
-	if ($row = ibase_fetch_assoc($result)) 
+	$result = mysqli_query($dbh, $query);
+	if ($row = mysqli_fetch_assoc($result)) 
 	{
 		session_start();
 		$_SESSION['user_login'] = $row['LOGIN'];

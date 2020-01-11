@@ -2,10 +2,10 @@
 if ($_SERVER['REQUEST_METHOD'] == 'GET' && !empty($_GET['id']))
 {
 	$id = clearData($_GET['id']);
-	$dbh = ibase_connect($host, $user, $pass);
+	$dbh = mysqli_connect($host, $user, $pass);
 	$query = "SELECT * FROM ITEMS WHERE ID='$id'";
-	$result = ibase_query($dbh, $query) or die("Сбой при доступе к БД: " . ibase_errmsg());
-	$row = ibase_fetch_row($result);
+	$result = mysqli_query($dbh, $query) or die("Сбой при доступе к БД: " );
+	$row = mysqli_fetch_row($result);
 }
 ?>
 

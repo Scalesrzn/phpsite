@@ -3,16 +3,16 @@ $file_path = 'Images/';
 if ($_SERVER['REQUEST_METHOD'] == 'GET')   $id = clearData($_GET['id']);
 if ($_SERVER['REQUEST_METHOD'] == 'POST')  $id = clearData($_POST['id']);
 
-$dbh = ibase_connect($host, $user, $pass);
-$result = ibase_query($dbh, "SELECT * FROM ITEMS WHERE ID='$id'") or die ("Сбой при доступе к БД: " . ibase_errmsg());
-$row = ibase_fetch_row($result);
+$dbh = mysqli_connect($host, $user, $pass);
+$result = mysqli_query($dbh, "SELECT * FROM ITEMS WHERE ID='$id'") or die ("Сбой при доступе к БД: " );
+$row = mysqli_fetch_row($result);
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST')
 {
 	if (!empty($_POST['brand']) && !empty($_POST['year']) && !empty($_POST['description']))
 	{
 		$nametovar = clearData($_POST['nametovar']);
-		$total_items = ibase_fetch_row(ibase_query("SELECT COUNT(*) FROM ITEMS WHERE nametovar='$nametovar' AND ID<>'$id'"));
+		$total_items = mysqli_fetch_row(mysqli_query($dbh,"SELECT COUNT(*) FROM ITEMS WHERE nametovar='$nametovar' AND ID<>'$id'"));
 		if ($total_items[0] < 1)
 		{
 			$brand = clearData($_POST['brand']);
@@ -51,7 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 				
 				$query = "UPDATE ITEMS SET nametovar='$nametovar',brand='$brand',year='$year',DESCRIPTION='$description' WHERE ID='$id'";
 			}
-			ibase_query($dbh, $query) or die ("Сбой при доступе к БД: " . ibase_errmsg());
+			mysqli_query($dbh, $query) or die ("Сбой при доступе к БД: " );
 			header("Location: index.php?page=catalog");
 		}
 		else echo 'Такая косметика уже добавлена';

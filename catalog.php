@@ -9,7 +9,7 @@
 	</tr>
 
 	<?php
-	$dbh = ibase_connect($host, $user, $pass);
+	$dbh = mysqli_connect($host, $user, $pass);
 	if (isset($_POST['delete']) && isset($_POST['cbs']))
 	{
 		$cbs = $_POST['cbs'];
@@ -17,19 +17,19 @@
 		for ($i = 0; $i < $count; $i++) 
 		{
 			$del = $cbs[$i];
-			$result = ibase_query($dbh, "SELECT * FROM ITEMS WHERE ID='$del'") or die("Сбой при доступе к БД: " . ibase_errmsg());
-			$row = ibase_fetch_row($result);
+			$result = mysqli_query($dbh, "SELECT * FROM ITEMS WHERE ID='$del'") or die("Сбой при доступе к БД: " );
+			$row = mysqli_fetch_row($result);
 			if (!empty($row[7]))
 			{
 				unlink($row[7]);
 			}
-			ibase_query($dbh, "DELETE FROM ITEMS WHERE ID='$del'") or die("Сбой при доступе к БД: " . ibase_errmsg());
+			mysqli_query($dbh, "DELETE FROM ITEMS WHERE ID='$del'") or die("Сбой при доступе к БД: " );
 		}
 	}
 
 	$query = "SELECT * FROM ITEMS ORDER BY ID";
-	$result = ibase_query($dbh, $query) or die ("Сбой при доступе к БД: " . ibase_errmsg());
-	while ($row = ibase_fetch_row($result)) 
+	$result = mysqli_query($dbh, $query) or die ("Сбой при доступе к БД: " );
+	while ($row = mysqli_fetch_row($result)) 
 	{
 		echo "
 		<tr>

@@ -122,11 +122,11 @@ function imageCheck()
 
 function getTableInfo($host, $user, $pass)
 {
-	$dbh = ibase_connect($host, $user, $pass);
+	$dbh = mysqli_connect($host, $user, $pass);
 	$query = "SELECT R.RDB\$RELATION_NAME AS RELATION_NAME, R.RDB\$FIELD_NAME AS FIELD_NAME, F.RDB\$FIELD_LENGTH AS FIELD_LENGTH, T.RDB\$TYPE_NAME AS TYPE_NAME, CASE R.RDB\$NULL_FLAG WHEN 1 THEN 'TRUE' ELSE 'FALSE' END AS NULL_FLAG, R.RDB\$FIELD_POSITION AS FIELD_POSITION
 	FROM RDB\$FIELDS F, RDB\$RELATION_FIELDS R, RDB\$TYPES T 
 	WHERE (F.RDB\$FIELD_NAME = R.RDB\$FIELD_SOURCE) AND (R.RDB\$SYSTEM_FLAG = 0) AND (F.RDB\$FIELD_TYPE = T.RDB\$TYPE) AND (T.RDB\$FIELD_NAME = 'RDB\$FIELD_TYPE') ORDER BY RELATION_NAME;";
-	$result = ibase_query($dbh, $query);
+	$result = mysqli_query($dbh, $query);
 	echo "<table border='1' width='60%'><tr>
 		  <th width='20%'>Таблица</th>
 		  <th width='20%'>Поле</th>
@@ -134,7 +134,7 @@ function getTableInfo($host, $user, $pass)
 		  <th width='10%'>Длина</th>
 		  <th width='30%'>Ограничение на NULL</th>
 		  <th width='10%'>Позиция</th></tr>";
-	while ($rows = ibase_fetch_object($result)) 
+	while ($rows = mysqli_fetch_object($result)) 
 	{ 
 	    echo "<tr><td>$rows->RELATION_NAME</td><td>$rows->FIELD_NAME</td><td>$rows->TYPE_NAME</td><td>$rows->FIELD_LENGTH</td><td>$rows->NULL_FLAG</td><td>$rows->FIELD_POSITION</td></tr>";
 	}
