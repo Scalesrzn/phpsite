@@ -58,6 +58,8 @@
 							case 'lab3': 
 							include 'lab_rab3.php'; break;				
 							case 'catalog':
+							include 'lab_rab4.php'; break;				
+							case 'catalog':
 							include 'catalog.php'; break;	
 							case 'add': 
 							include 'add.php'; break;

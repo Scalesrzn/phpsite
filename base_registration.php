@@ -1,5 +1,5 @@
 <?php 
-$host="localhost:D:\BASE.fdb"; 
-$user="SYSDBA"; 
-$pass="0";
+$host="localhost"; 
+$user="scalesrzn_Scales"; 
+$pass="Scalesrzn123";
 ?> 
