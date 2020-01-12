@@ -1,7 +1,6 @@
 ﻿<button onclick="location.href='index.php?page=add';" class="catalog_2" style="float: left;">Добавить</button>
 <table class="data_table"  border="1">
 	<tr>
-		<th width="10%">ID</th>
 		<th width="20%">Название</th>
 		<th width="25%">Страна</th>
 		<th width="20%">Бренд</th>
@@ -35,7 +34,6 @@
 	{
 		echo "
 		<tr>
-			<td>$row[0]</td>
 			<td>
 				<a href='index.php?page=item&id=$row[0]'>
 					$row[1]

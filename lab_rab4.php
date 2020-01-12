@@ -1,12 +1,13 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <?php
 //Параметры подключения
-$user = "SYSDBA"; 
-$pass = "0";
-$host = 'localhost:D:\BASE_TMP.fdb';
+$host="localhost"; 
+$user="scalesrzn_phplab"; 
+$pass="WCHx&Z2l";
+$database='scalesrzn_phplab';
 //$dbh = mysqli_connect($host, $user, $pass);
 //Создание БД
-mysqli_query($dbh, "CREATE DATABASE '$host' USER '$user' PASSWORD '$pass'");
+mysqli_query($dbh, "CREATE DATABASE '$host' USERS '$user' PASSWORD '$pass'");
 
 mysqli_close($dbh);
 echo 'База данных успешно создана!</br>';
@@ -15,7 +16,7 @@ $dbh = mysqli_connect($host, $user, $pass);
 //Начало транзакции
 //mysqli_trans();
 //Создание таблиц																		
-mysqli_query($dbh, "CREATE TABLE Users (id INTEGER primary key, name VARCHAR(60) not null, date_born DATE, adress VARCHAR(80) not null, phone SMALLINT)") or die ("Сбой при доступе к БД: " );
+mysqli_query($dbh, "CREATE TABLE UsersLAB (id INTEGER primary key, name VARCHAR(60) not null, date_born DATE, adress VARCHAR(80) not null, phone SMALLINT)") or die ("Сбой при доступе к БД: " );
 mysqli_query($dbh, "CREATE TABLE Purchase (id INTEGER primary key, name VARCHAR(60) not null, cost INTEGER, userid INTEGER REFERENCES Users not null  , date_purchase TIMESTAMP)") or die ("Сбой при доступе к БД: " );
 
 $tablename = 'Users';
@@ -43,7 +44,7 @@ mysqli_query($dbh, 'CREATE TRIGGER INC_2' . $primarykey . ' FOR ' . $tablename
 
 mysqli_commit($dbh);
 //Вывод информации о таблицах
-getTableInfo($host, $user, $pass);
+getTableInfo($host, $user, $pass, $database);
 //mysqli_trans($dbh);
 echo '</br>Измененная структура базы данных:</br>';
 //Изменение структуры таблицы
@@ -54,14 +55,14 @@ mysqli_query($dbh, "ALTER TABLE Users add email VARCHAR(50)");
 mysqli_commit($dbh);
 
 //Вывод информации о таблицах
-getTableInfo($host, $user, $pass);
-$dbh = mysqli_connect($host, $user, $pass);//хз
+getTableInfo($host, $user, $pass, $database);
+$dbh = mysqli_connect($host, $user, $pass, $database);//хз
 //Заполнение таблиц данными
 
 
-mysqli_query($dbh, "INSERT INTO Users (name,adress,date_born,email) VALUES ('Иванов','Новосибирск','1996.11.15', 'ivanov@mail.ru')");
-mysqli_query($dbh, "INSERT INTO Users (name,adress,date_born,email) VALUES ('Петров','Орел','1992.06.12','petrov@mail.ru')");
-mysqli_query($dbh, "INSERT INTO Users (name,adress,date_born,email) VALUES ('Сидоров','Москва','1998.02.03','sidorov@mail.ru')");
+mysqli_query($dbh, "INSERT INTO UsersLAB (name,adress,date_born,email) VALUES ('Иванов','Новосибирск','1996.11.15', 'ivanov@mail.ru')");
+mysqli_query($dbh, "INSERT INTO UsersLAB (name,adress,date_born,email) VALUES ('Петров','Орел','1992.06.12','petrov@mail.ru')");
+mysqli_query($dbh, "INSERT INTO UsersLAB (name,adress,date_born,email) VALUES ('Сидоров','Москва','1998.02.03','sidorov@mail.ru')");
 
 mysqli_query($dbh, "INSERT INTO Purchase (name,cost,userid,date_purchase,description) VALUES ('Тени для век','550','1','2019.11.23 15:45:45', 'были разбиты')");
 mysqli_query($dbh, "INSERT INTO Purchase (name,cost,userid,date_purchase,description) VALUES ('Помада','670','2','2019.11.25 16:47:52', 'нет колпачка')");

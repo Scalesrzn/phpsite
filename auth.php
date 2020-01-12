@@ -1,13 +1,18 @@
 <?php
 if (isset($_POST['login']) && isset($_POST['password']))
 {
+	$host="localhost"; 
+	$user="scalesrzn_phplab"; 
+	$pass="WCHx&Z2l";
+	$database='scalesrzn_phplab';
 	$login = clearData($_POST['login']);
 	$password = clearData($_POST['password']);
-	$dbh = mysqli_connect($host, $user, $pass); 
+	$dbh = mysqli_connect($host, $user, $pass,$database); 
 
 	
-	$query = "SELECT * FROM USE WHERE LOGIN='$login' AND PASSWORD='$password'";
+	$query = "SELECT * FROM USERS WHERE LOGIN='$login' AND PASSWORD='$password'";
 	$result = mysqli_query($dbh, $query);
+
 	if ($row = mysqli_fetch_assoc($result)) 
 	{
 		session_start();
@@ -41,7 +46,7 @@ else {
 							<p>Пароль:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="password" name="password" ><br>
 								<p><input type="submit" value="Отправить"><br>
 								</form>
-								<button onclick="location.href='index.php?page=reg';">Зарегистрироваться</button>
+								<button onclick="location.href='http://vrednayapolza.ru/registration.php';">Зарегистрироваться</button>
 
 							</td>
 						</tr>

@@ -41,6 +41,14 @@
 			<div class="content">
 				<div class="toggle">
 					<?php
+						require 'base_registration.php';
+						if (!empty($_GET['page']))
+							$page = $_GET['page'];
+						if ($page == 'reg')
+						{
+							include 'registration.php';
+							exit;
+						}
 						if (!empty($_GET['page']))
 								$page = $_GET['page'];
 						require 'auth.php';
@@ -57,8 +65,10 @@
 							include 'lab_rab2.php'; break;
 							case 'lab3': 
 							include 'lab_rab3.php'; break;				
-							case 'catalog':
-							include 'lab_rab4.php'; break;				
+							case 'lab4':
+							include 'lab_rab4.php'; break;		
+							case 'reg':
+							include 'registration.php'; break;		
 							case 'catalog':
 							include 'catalog.php'; break;	
 							case 'add': 

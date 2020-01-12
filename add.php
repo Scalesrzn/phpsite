@@ -1,62 +1,25 @@
-<!-- <?php   
-if ($_SERVER['REQUEST_METHOD'] == 'POST') { 
-	if (!empty($_POST['name']) && !empty($_POST['brand']) && !empty($_POST['year']) && !empty($_POST['description'])) {	if ($_FILES['uploadfile']['tmp_name']) {
-		$a = loadImage("add");		
-		if (empty($a['mess'])) {
-			if (empty($_SESSION['catalog'])) 
-				$_SESSION['catalog']=array(array("name"=>clearData($_POST['name']),
-					"brand"=>clearData($_POST['brand']),
-					"year"=>clearData($_POST['year']),
-					"description"=>clearData($_POST['description']),
-					"image"=>$a['src']));
-			else array_push($_SESSION['catalog'], array("name"=>clearData($_POST['name']),
-				"brand"=>clearData($_POST['brand']),
-				"year"=>clearData($_POST['year']),
-				"description"=>clearData($_POST['description']),
-				"image"=>$a['src']));			
-				header("Location: index.php?page=catalog");
-			exit;
-		}
-		else { 
-			echo $a['mess'];
-		}
-	}
-	else {			
-		if (empty($_SESSION['catalog'])) 
-			$_SESSION['catalog']=array(array("name"=>clearData($_POST['name']),
-				"brand"=>clearData($_POST['brand']),
-				"year"=>clearData($_POST['year']),
-				"description"=>clearData($_POST['description']),
-				"image"=>""));
-		else array_push($_SESSION['catalog'], array("name"=>clearData($_POST['name']),
-			"brand"=>clearData($_POST['brand']),
-			"year"=>clearData($_POST['year']),
-			"description"=>clearData($_POST['description']),
-			"image"=>""));			
-			header("Location: index.php?page=catalog");
-		exit;
-	}
-}
-else 
-	echo '<font size="5" color="DarkRed"><strong>Не все поля заполнены!</strong></font>';	
-}
-?> -->
+
 
 <?php
+	$host="localhost"; 
+	$user="scalesrzn_phplab"; 
+	$pass="WCHx&Z2l";
+	$database='scalesrzn_phplab';
 if ($_SERVER['REQUEST_METHOD'] == 'POST')
 {
 	if (!empty($_POST['nametovar']) && !empty($_POST['brand']) && !empty($_POST['year']) && !empty($_POST['description']))
 	{
 		$nametovar = clearData($_POST['nametovar']);
-		$dbh = mysqli_connect($host, $user, $pass);
-		$total_items = mysqli_fetch_row(mysqli_query($dbh,"SELECT COUNT(*) FROM ITEMS WHERE nametovar='$nametovar'"));
+		$dbh = mysqli_connect($host, $user, $pass, $database);
+		$result = mysqli_query($dbh,"SELECT COUNT(*) FROM ITEMS WHERE nametovar='$nametovar'");
+		$total_items = mysqli_fetch_row($result);
 		if ($total_items[0] < 1)
 		{
 			$brand = clearData($_POST['brand']);
 			$year = clearData($_POST['year']);
 			$description = clearData($_POST['description']);
 
-			if (!empty($_FILES['uploadfile']['nametovar']))
+			if (!empty($_FILES['uploadfile']['name']))
 			{
 				$tmp_path = 'tmp/';
 				$file_path = 'Images/';
@@ -65,8 +28,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 				{
 					$name = resize($_FILES['uploadfile']);
 					$uploadfile = $file_path . $name;
-					if (@copy($tmp_path . $name, $file_path . $nametovar . '.jpg'))
-						$uploadlink = $file_path . $nametovar . '.jpg';
+					if (@copy($tmp_path . $name, $file_path . $nametovar))
+						$uploadlink = $file_path . $nametovar ;
 					unlink($tmp_path . $name);
 				}
 				else
@@ -79,7 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 			mysqli_query($dbh, $query) or die ("Сбой при доступе к БД: ");
 			header("Location: index.php?page=catalog");
 		}
-		else echo 'Такая косметика уже добавлена';
+		else echo 'Такой товар уже существует';
 	}
 	else echo 'Полностью заполните форму';
 }

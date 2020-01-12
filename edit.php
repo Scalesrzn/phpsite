@@ -1,10 +1,14 @@
 <?php
+$host="localhost"; 
+$user="scalesrzn_phplab"; 
+$pass="WCHx&Z2l";
+$database='scalesrzn_phplab';
 $file_path = 'Images/';
 if ($_SERVER['REQUEST_METHOD'] == 'GET')   $id = clearData($_GET['id']);
 if ($_SERVER['REQUEST_METHOD'] == 'POST')  $id = clearData($_POST['id']);
 
-$dbh = mysqli_connect($host, $user, $pass);
-$result = mysqli_query($dbh, "SELECT * FROM ITEMS WHERE ID='$id'") or die ("Сбой при доступе к БД: " );
+$dbh = mysqli_connect($host, $user, $pass, $database);
+$result = mysqli_query($dbh, "SELECT * FROM ITEMS WHERE nametovar='$id'");
 $row = mysqli_fetch_row($result);
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST')
@@ -12,16 +16,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 	if (!empty($_POST['brand']) && !empty($_POST['year']) && !empty($_POST['description']))
 	{
 		$nametovar = clearData($_POST['nametovar']);
-		$total_items = mysqli_fetch_row(mysqli_query($dbh,"SELECT COUNT(*) FROM ITEMS WHERE nametovar='$nametovar' AND ID<>'$id'"));
+		$total_items = mysqli_fetch_row(mysqli_query($dbh,"SELECT COUNT(*) FROM ITEMS WHERE nametovar='$nametovar'"));
 		if ($total_items[0] < 1)
 		{
 			$brand = clearData($_POST['brand']);
 			$year = clearData($_POST['year']);
 			$description = clearData($_POST['description']);
 
-			if (($nametovar <> $row[1]) or (!empty($_FILES['uploadfile']['name'])))
+			if (($nametovar <> $row[0]) or (!empty($_FILES['uploadfile']['name'])))
 			{
-				if ($nametovar <> $row[1])
+				if ($nametovar <> $row[0])
 				{
 					rename($row[7], $file_path . $nametovar . '.jpg');
 				}
@@ -44,17 +48,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 				}
 				$uploadlink = $file_path . $nametovar . '.jpg';
 				
-				$query = "UPDATE ITEMS SET nametovar='$nametovar',brand='$brand',year='$year',DESCRIPTION='$description',uploadlink='$uploadlink' WHERE ID='$id'";
+				$query = "UPDATE ITEMS SET nametovar='$nametovar',brand='$brand',year='$year',DESCRIPTION='$description',uploadlink='$uploadlink' WHERE nametovar='$id'";
 			}
 			else
 			{
 				
-				$query = "UPDATE ITEMS SET nametovar='$nametovar',brand='$brand',year='$year',DESCRIPTION='$description' WHERE ID='$id'";
+				$query = "UPDATE ITEMS SET nametovar='$nametovar',brand='$brand',year='$year',DESCRIPTION='$description' WHERE nametovar='$id'";
 			}
 			mysqli_query($dbh, $query) or die ("Сбой при доступе к БД: " );
 			header("Location: index.php?page=catalog");
 		}
-		else echo 'Такая косметика уже добавлена';
+		else echo 'Такой товар уже существует';
 	}
 	else echo 'Полностью заполните форму';	
 }
@@ -67,7 +71,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 		<table>
 			<tr>
 				<th>Название товара:</th>
-				<td><input type='text' name='nametovar' value='<?=$row[1]?>' size="35"></td>
+				<td><input type='text' name='nametovar' value='<?=$row[0]?>' size="35"></td>
 			</tr>
 			<tr>
 				<th>Бренд:</th> 
