@@ -42,7 +42,11 @@
 								$login_reg = clearData($_POST['login_reg']);
 								$hash_password = clearData($_POST['password_1']);
 								$email_reg = clearData($_POST['email']);
-								
+								if (!preg_match("~^[-a-z0-9!#$%&'*+/=?^_`{|}]+(\.[-a-z0-9!#$%&'*+/=?^_`{|}]+)*@([a-z0-9]([-a-z0-9]{0,61}[a-z0-9])?\.)*(aero|arpa|asia|biz|cat|com|coop|edu|gov|info|int|jobs|mil|mobi|museum|name|net|org|pro|tel|travel|[a-z][a-z])$~", $email_reg)) 
+								{
+									echo '<h3>Введите корректный адрес электронной почты</h3>';
+									exit;
+								}
 								$dbh = mysqli_connect($host, $user, $pass, $database); 
 								$query = "INSERT INTO USERS (LOGIN,PASSWORD,EMAIL) VALUES ('$login_reg','$hash_password','$email_reg')";
 								if (mysqli_query($dbh, $query))

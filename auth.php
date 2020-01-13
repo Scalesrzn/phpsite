@@ -40,6 +40,7 @@ else {
 			<tr>
 				<td>
 					<h3>Авторизируйтесь:</h3>
+					<img class="user-foto" alt="Пользователь">
 					<form method="POST">
 						<p>Логин:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="login" ><br>
 							<p>Пароль:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="password" name="password" ><br>

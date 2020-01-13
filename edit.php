@@ -20,7 +20,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 		$brand = clearData($_POST['brand']);
 		$year = clearData($_POST['year']);
 		$description = clearData($_POST['description']);
-
+		$description = preg_replace("~(?:(?:https?|ftp|telnet)://(?:[a-z0-9_-]{1,32}".
+				"(?::[a-z0-9_-]{1,32})?@)?)?(?:(?:[a-z0-9-]{1,128}\.)+(?:com|net|".
+				"org|mil|edu|arpa|gov|biz|info|aero|inc|name|[a-z]{2})|(?!0)(?:(?".
+				"!0[^.]|255)[0-9]{1,3}\.){3}(?!0|255)[0-9]{1,3})(?:/[a-z0-9.,_@%&".
+				"?+=\~/-]*)?(?:#[^ '\"&<>]*)?~i",'',$description);
 		if (($nametovar <> $row[0]) or (!empty($_FILES['uploadfile']['name'])))
 		{
 			if ($nametovar <> $row[0])

@@ -143,5 +143,25 @@ function imageCheck()
 		}
 		echo "</table>";
 	}
+	function getOutputMenu($num, $total_items, $n, $param) {
+		//Инициализация переменных
+		$pervpage = "";
+		$page1left = "";
+		$page2left = "";
+		$page1right = "";
+		$page2right = "";
+		$nextpage = "";
+		$total = intval(($total_items[0] - 1) / $num) + 1; 
+		$n = intval($n);
+		if($n > $total) $n = $total;
+		if ($n != 1) $pervpage = '<a href= ./index.php?' .$param. '&n=1><<</a><a href= ./index.php?' .$param. '&n='. ($n - 1) .'><</a>';  
+		if ($n != $total) $nextpage = '<a href= ./index.php?' .$param. '&n='. ($n + 1) .'>></a><a href= ./index.php?' .$param. '&n=' .$total. '>>></a>';   
+		if($n - 2 > 0) $page2left = ' <a href= ./index.php?' .$param. '&n='. ($n - 2) .'>'. ($n - 2) .'</a> | ';  
+		if($n - 1 > 0) $page1left = '<a href= ./index.php?' .$param. '&n='. ($n - 1) .'>'. ($n - 1) .'</a> | ';  
+		if($n + 2 <= $total) $page2right = ' | <a href= ./index.php?' .$param. '&n='. ($n + 2) .'>'. ($n + 2) .'</a>';  
+		if($n + 1 <= $total) $page1right = ' | <a href= ./index.php?' .$param. '&n='. ($n + 1) .'>'. ($n + 1) .'</a>'; 
+		echo '<div style="margin-left:40px">'.$pervpage.$page2left.$page1left.'<b>'.$n.'</b>'.$page1right.$page2right.$nextpage.'</div>';  
+	}
 	
+
    ?>
