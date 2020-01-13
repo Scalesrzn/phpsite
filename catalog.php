@@ -1,11 +1,3 @@
-<!-- <button class="btn" onclick="location.href='index.php?page=add';" class="catalog_2" style="float: left;">Добавить</button>
-<table class="addtable"  border="1">
-	<tr>
-		<th width="20%">Название товара</th>
-		<th width="25%">Бренд</th>
-		<th width="20%">Год модели</th>
-		<th width="15%">Описание</th>
-	</tr> -->
 	<div class='addtable'>
 	<form method='GET' action='index.php'>
 		<input type='hidden' name='page' value='catalog'>
@@ -94,8 +86,13 @@
 			echo '<h3>Ничего не найдено</h3>';
 			exit;
 		}
-		
-		$query = "SELECT * FROM ITEMS ". $where . implode(' OR ', $conditions). $and . $condition2. " ". $order_by;
+		$login = $_SESSION['user_login'];
+		if ($login='admin'){
+			$query = "SELECT * FROM ITEMS ". $where . implode(' OR ', $conditions). $and . $condition2. " ". $order_by;
+		}
+		else {
+			$query = "SELECT * FROM ITEMS WHERE Login='$login'" . implode(' OR ', $conditions). $and . $condition2. " ". $order_by;
+		}
 		$result = mysqli_query($dbh, $query);
 		echo "<table class='addtable' border='1'><tr>
 		<th width='35%'><a href='index.php?page=catalog&sort=1&nametovar=$nametovar&type=$type'>Название товара</a></th>

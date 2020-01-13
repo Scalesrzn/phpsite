@@ -39,6 +39,8 @@
 						{
 							if ($_POST['password_1'] == $_POST['password_2'])
 							{
+								$firstname = clearData($_POST['FirstN']);
+								$surename = clearData($_POST['SureN']);
 								$login_reg = clearData($_POST['login_reg']);
 								$hash_password = clearData($_POST['password_1']);
 								$email_reg = clearData($_POST['email']);
@@ -48,7 +50,7 @@
 									exit;
 								}
 								$dbh = mysqli_connect($host, $user, $pass, $database); 
-								$query = "INSERT INTO USERS (LOGIN,PASSWORD,EMAIL) VALUES ('$login_reg','$hash_password','$email_reg')";
+								$query = "INSERT INTO USERS (FIRST,SURE,LOGIN,PASSWORD,EMAIL) VALUES ('$firstname', '$surename', '$login_reg','$hash_password','$email_reg')";
 								if (mysqli_query($dbh, $query))
 									echo "Зарегистрирован успешно";
 								else 
@@ -67,6 +69,22 @@
 						<tr>
 							<td><form method="POST">
 								<table>
+									<tr>
+										<td>
+											<label>Имя:</label>
+										</td>
+										<td>
+											<input type="text" required name="FirstN" style="margin-left:30px">
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<label>Фамилия:</label>
+										</td>
+										<td>
+											<input type="text" required name="SureN" style="margin-left:30px">
+										</td>
+									</tr>
 									<tr>
 										<td>
 											<label>Логин:</label>

@@ -5,6 +5,7 @@
 	$user="scalesrzn_phplab"; 
 	$pass="WCHx&Z2l";
 	$database='scalesrzn_phplab';
+	$login = $_SESSION['user_login'];
 if ($_SERVER['REQUEST_METHOD'] == 'POST')
 {
 	if (!empty($_POST['nametovar']) && !empty($_POST['brand']) && !empty($_POST['year']) && !empty($_POST['description']))
@@ -20,6 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 		$total_items = mysqli_fetch_row($result);
 		if ($total_items[0] < 1)
 		{
+			
 			$brand = clearData($_POST['brand']);
 			$year = clearData($_POST['year']);
 			$description = clearData($_POST['description']);
@@ -47,7 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 				}
 			}
 			$uploadlink = $file_path . $nametovar . '.jpg';
-			$query = "INSERT INTO ITEMS (nametovar,brand,year,DESCRIPTION,uploadlink) VALUES ('$nametovar','$brand','$year','$description','$uploadlink')";
+			$query = "INSERT INTO ITEMS (nametovar,brand,year,DESCRIPTION,uploadlink, Login) VALUES ('$nametovar','$brand','$year','$description','$uploadlink', '$login')";
 			mysqli_query($dbh, $query) or die ("Сбой при доступе к БД: ");
 			header("Location: index.php?page=catalog");
 		}
