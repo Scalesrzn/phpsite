@@ -1,5 +1,5 @@
 <button class="btn" onclick="location.href='index.php?page=add';" class="catalog_2" style="float: left;">Добавить</button>
-<table class="data_table"  border="1">
+<table class="addtable"  border="1">
 	<tr>
 		<th width="20%">Название товара</th>
 		<th width="25%">Бренд</th>
