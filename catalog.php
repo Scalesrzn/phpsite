@@ -1,4 +1,4 @@
-<button onclick="location.href='index.php?page=add';" class="catalog_2" style="float: left;">Добавить</button>
+<button class="btn" onclick="location.href='index.php?page=add';" class="catalog_2" style="float: left;">Добавить</button>
 <table class="data_table"  border="1">
 	<tr>
 		<th width="20%">Название товара</th>
@@ -51,7 +51,7 @@
 		</tr>";
 	}
 	echo "
-	<input id='delete' type='submit' name='delete' value='Удалить' class='catalog_2'/>
+	<input class='btn' id='delete' type='submit' name='delete' value='Удалить' class='catalog_2'/>
 	</form>
 	</table>
 	";

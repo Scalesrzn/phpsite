@@ -17,48 +17,44 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 	{
 		$nametovar = clearData($_POST['nametovar']);
 		$total_items = mysqli_fetch_row(mysqli_query($dbh,"SELECT COUNT(*) FROM ITEMS WHERE nametovar='$nametovar'"));
-		if ($total_items[0] < 1)
-		{
-			$brand = clearData($_POST['brand']);
-			$year = clearData($_POST['year']);
-			$description = clearData($_POST['description']);
+		$brand = clearData($_POST['brand']);
+		$year = clearData($_POST['year']);
+		$description = clearData($_POST['description']);
 
-			if (($nametovar <> $row[0]) or (!empty($_FILES['uploadfile']['name'])))
+		if (($nametovar <> $row[0]) or (!empty($_FILES['uploadfile']['name'])))
+		{
+			if ($nametovar <> $row[0])
 			{
-				if ($nametovar <> $row[0])
-				{
-					rename($row[7], $file_path . $nametovar . '.jpg');
-				}
-				if (!empty($_FILES['uploadfile']['name']))
-				{
-					$tmp_path = 'tmp/';
-					$result = imageCheck();
-					if ($result == 1)
-					{
-						$name = resize($_FILES['uploadfile']);
-						$uploadfile = $file_path . $name;
-						if (@copy($tmp_path . $name, $file_path . $nametovar . '.jpg'))
-							unlink($tmp_path . $name);
-					}
-					else
-					{
-						echo $result;
-						exit;
-					}
-				}
-				$uploadlink = $file_path . $nametovar . '.jpg';
-				
-				$query = "UPDATE ITEMS SET nametovar='$nametovar',brand='$brand',year='$year',DESCRIPTION='$description',uploadlink='$uploadlink' WHERE nametovar='$id'";
+				rename($row[7], $file_path . $nametovar . '.jpg');
 			}
-			else
+			if (!empty($_FILES['uploadfile']['name']))
 			{
-				
-				$query = "UPDATE ITEMS SET nametovar='$nametovar',brand='$brand',year='$year',DESCRIPTION='$description' WHERE nametovar='$id'";
+				$tmp_path = 'tmp/';
+				$result = imageCheck();
+				if ($result == 1)
+				{
+					$name = resize($_FILES['uploadfile']);
+					$uploadfile = $file_path . $name;
+					if (@copy($tmp_path . $name, $file_path . $nametovar . '.jpg'))
+						unlink($tmp_path . $name);
+				}
+				else
+				{
+					echo $result;
+					exit;
+				}
 			}
-			mysqli_query($dbh, $query) or die ("Сбой при доступе к БД: " );
-			header("Location: index.php?page=catalog");
+			$uploadlink = $file_path . $nametovar . '.jpg';
+			
+			$query = "UPDATE ITEMS SET nametovar='$nametovar',brand='$brand',year='$year',DESCRIPTION='$description',uploadlink='$uploadlink' WHERE nametovar='$id'";
 		}
-		else echo 'Такой товар уже существует';
+		else
+		{
+			
+			$query = "UPDATE ITEMS SET nametovar='$nametovar',brand='$brand',year='$year',DESCRIPTION='$description' WHERE nametovar='$id'";
+		}
+		mysqli_query($dbh, $query) or die ("Сбой при доступе к БД: " );
+		header("Location: index.php?page=catalog");
 	}
 	else echo 'Полностью заполните форму';	
 }

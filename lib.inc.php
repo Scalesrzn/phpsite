@@ -120,25 +120,28 @@ function imageCheck()
         }
     }
 
-function getTableInfo($host, $user, $pass)
-{
-	$dbh = mysqli_connect($host, $user, $pass);
-	$query = "SELECT R.RDB\$RELATION_NAME AS RELATION_NAME, R.RDB\$FIELD_NAME AS FIELD_NAME, F.RDB\$FIELD_LENGTH AS FIELD_LENGTH, T.RDB\$TYPE_NAME AS TYPE_NAME, CASE R.RDB\$NULL_FLAG WHEN 1 THEN 'TRUE' ELSE 'FALSE' END AS NULL_FLAG, R.RDB\$FIELD_POSITION AS FIELD_POSITION
-	FROM RDB\$FIELDS F, RDB\$RELATION_FIELDS R, RDB\$TYPES T 
-	WHERE (F.RDB\$FIELD_NAME = R.RDB\$FIELD_SOURCE) AND (R.RDB\$SYSTEM_FLAG = 0) AND (F.RDB\$FIELD_TYPE = T.RDB\$TYPE) AND (T.RDB\$FIELD_NAME = 'RDB\$FIELD_TYPE') ORDER BY RELATION_NAME;";
-	$result = mysqli_query($dbh, $query);
-	echo "<table border='1' width='60%'><tr>
-		  <th width='20%'>Таблица</th>
-		  <th width='20%'>Поле</th>
-		  <th width='10%'>Тип</th>
-		  <th width='10%'>Длина</th>
-		  <th width='30%'>Ограничение на NULL</th>
-		  <th width='10%'>Позиция</th></tr>";
-	while ($rows = mysqli_fetch_object($result)) 
-	{ 
-	    echo "<tr><td>$rows->RELATION_NAME</td><td>$rows->FIELD_NAME</td><td>$rows->TYPE_NAME</td><td>$rows->FIELD_LENGTH</td><td>$rows->NULL_FLAG</td><td>$rows->FIELD_POSITION</td></tr>";
+	function getTableInfo($host, $user, $pass, $database)
+	{
+		$dbh = mysqli_connect($host, $user, $pass, $database);
+		$query = 'SHOW COLUMNS FROM UsersLAB';
+		$result = mysqli_query($dbh, $query);
+		echo "<table border='1' width='60%'><tr>
+			  <th width='20%'>Таблица</th>
+			  <th width='20%'>Поле</th>
+			  <th width='10%'>Тип</th>
+			  <th width='10%'>Длина</th>
+			  <th width='30%'>Ограничение на NULL</th></tr>";
+		while ($rows = mysqli_fetch_object($result)) 
+		{ 
+			echo "<tr><td>UsersLAB</td><td>$rows->Field</td><td>$rows->Type</td><td>$rows->Key</td><td>$rows->Null</td></tr>";
+		}
+		$query = 'SHOW COLUMNS FROM Purchase';
+		$result = mysqli_query($dbh, $query);
+		while ($rows = mysqli_fetch_object($result)) 
+		{ 
+			echo "<tr><td>Purchase</td><td>$rows->Field</td><td>$rows->Type</td><td>$rows->Key</td><td>$rows->Null</td></tr>";
+		}
+		echo "</table>";
 	}
-	echo "</table>";
-}
 	
    ?>

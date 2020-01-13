@@ -22,22 +22,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 			if (!empty($_FILES['uploadfile']['name']))
 			{
 				$tmp_path = 'tmp/';
-				$file_path = 'Images/';
 				$result = imageCheck();
+				$file_path = 'Images/';
 				if ($result == 1)
 				{
 					$name = resize($_FILES['uploadfile']);
 					$uploadfile = $file_path . $name;
-					if (@copy($tmp_path . $name, $file_path . $nametovar))
-						$uploadlink = $file_path . $nametovar ;
-					unlink($tmp_path . $name);
+					if (@copy($tmp_path . $name, $file_path . $nametovar . '.jpg'))
+						unlink($tmp_path . $name);
 				}
 				else
 				{
 					echo $result;
 					exit;
-				} 
+				}
 			}
+			$uploadlink = $file_path . $nametovar . '.jpg';
 			$query = "INSERT INTO ITEMS (nametovar,brand,year,DESCRIPTION,uploadlink) VALUES ('$nametovar','$brand','$year','$description','$uploadlink')";
 			mysqli_query($dbh, $query) or die ("Сбой при доступе к БД: ");
 			header("Location: index.php?page=catalog");
@@ -70,7 +70,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 		</tr>
 		<tr>
 			<th>Изображение:</th> 
-			<td><input type='file' name='uploadfile' accept='image/jpeg'></td>
+			<td><input type='file' name='uploadfile' accept='.jpg'></td>
 		</tr>
 	</table>
 	<center><p><input class="btn" type='submit' value='Добавить' name='add' style="margin: 5px 0px 100px 100px"></p></center>

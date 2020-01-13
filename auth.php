@@ -44,9 +44,9 @@ else {
 					<form method="POST">
 						<p>Логин:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="login" ><br>
 							<p>Пароль:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="password" name="password" ><br>
-								<p><input type="submit" value="Отправить"><br>
+								<p><input class="btn" type="submit" value="Отправить"><br>
 								</form>
-								<button onclick="location.href='http://vrednayapolza.ru/registration.php';">Зарегистрироваться</button>
+								<button  class="btn" onclick="location.href='http://vrednayapolza.ru/registration.php';">Зарегистрироваться</button>
 
 							</td>
 						</tr>
